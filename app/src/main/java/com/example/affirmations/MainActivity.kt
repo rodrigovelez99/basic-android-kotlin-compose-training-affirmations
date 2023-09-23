@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2023 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.example.affirmations
 
 import android.os.Bundle
@@ -34,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -73,7 +60,9 @@ fun AffirmationList(affirmationList: List<Affirmation>, modifier: Modifier = Mod
         items(affirmationList) { affirmation ->
             AffirmationCard(
                 affirmation = affirmation,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier
+                    .padding(8.dp)
+
             )
         }
     }
@@ -96,12 +85,43 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(16.dp),
                 style = MaterialTheme.typography.headlineSmall
             )
+            Text(
+                text = integerResource(affirmation.integerResourceId).toString(),
+                modifier = Modifier.padding(16.dp),
+                style = MaterialTheme.typography.headlineSmall // Puedes usar otro estilo según tu preferencia
+            )
+
         }
     }
 }
 
+
+
 @Preview
 @Composable
-private fun AffirmationCardPreview() {
-    AffirmationCard(Affirmation(R.string.affirmation1, R.drawable.image1))
+private fun AffirmationCardPreview1() {
+    AffirmationCard(Affirmation(R.string.affirmation1, R.drawable.image1, R.integer.integer1))
+
+}
+@Preview
+@Composable
+private fun AffirmationCardPreview2() {
+    AffirmationCard(Affirmation(R.string.affirmation2, R.drawable.image2, R.integer.integer2))
+
+}
+@Preview
+@Composable
+private fun AffirmationCardPreview3() {
+    AffirmationCard(Affirmation(R.string.affirmation3, R.drawable.image3, R.integer.integer3))
+
+}
+
+@Preview
+@Composable
+private fun AffirmationCardPreviews() {
+    Column {
+        AffirmationCardPreview1()
+        AffirmationCardPreview2()
+        AffirmationCardPreview3()
+    }
 }
